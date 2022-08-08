@@ -1,0 +1,86 @@
+* {
+    font-family: "Poppins", sans-serif;
+}
+
+.wrapper {
+    display: block;
+    margin: 1rem 10vw;
+}
+
+.logo {
+    transform: translateY(164%);
+    pointer-events: none;
+}
+
+ul {
+    margin-left: 50%;
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+.index-intro {
+    height: 10vh;
+}
+
+.index-categories {
+    margin-top: 10rem;
+}
+
+.index-categories > div {
+    display: flex;
+    justify-content: space-around;
+}
+
+.index-categories-list > div {
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+    background: #1f7e4c;
+    text-align: center;
+    margin-top: 4rem;
+    transition: all 0.4s ease-in-out;
+}
+
+.index-categories-list > div:hover {
+    transform: scale(1.4);
+    border-radius: 3rem;
+    background: #8e1cba;
+}
+
+.index-categories-list > div > h3 {
+    line-height: 15rem;
+    margin: 0;
+    color: white;
+}
+
+.signup-form {
+    margin: 15rem 30rem;
+}
+
+.signup-form-form > form > * {
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.signup-form-form > form > input {
+    width: 100%;
+}
+
+.login-form {
+    margin: 18rem 30rem;
+}
+
+.login-form-form > form > * {
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.login-form-form > form > input {
+    width: 100%;
+}
