@@ -232,8 +232,12 @@ form {
 }
 
 .other-form {
-    text-align: center;
-    margin-block: 4vh;
+    display: block;
+    position: absolute;
+    bottom: 2vh;
+
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .other-form > a {

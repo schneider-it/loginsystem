@@ -34,6 +34,7 @@ class Signup extends Dbh {
             $result = true;
         }
 
+        $stmt = null;
         return $result;
     }
 
@@ -55,6 +56,7 @@ class Signup extends Dbh {
             $result = true;
         }
 
+        $stmt = null;
         return $result;
     }
 

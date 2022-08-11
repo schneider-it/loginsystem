@@ -17,11 +17,9 @@
                             <span class="content content-password">password</span>
                         </label>
                     </div>
+                    <div style="text-align: right; margin-bottom: 1vh;"><a href="reset-password.php">Forgot your password?</a></div>
                     <button class="submit" type="submit" name="submit">Log In</button>
                 </form>
-            </div>
-            <div class="other-form">
-                No account? <a href="signup.php">Create one</a>
             </div>
             
 
@@ -41,6 +39,9 @@
                 }
             ?>
         </section>
+        <div class="other-form">
+            No account? <a href="signup.php">Create one</a>
+        </div>
 <?php
     include_once 'header.php';
 ?>

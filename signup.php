@@ -4,7 +4,7 @@
         <section class="signup-form">
             <h2>Sign Up</h2>
             <div class="signup-form-form">
-                <form method="post" action="includes/signup.inc.php" autocomplete="off">
+                <form method="post" action="includes/signup.inc.php" autocomplete="off" id="form">
                     <div class="form">
                         <input type="text" name="username" required autocomplete="off" />
                         <label for="username" class="label label-username">
@@ -40,7 +40,7 @@
                     <div class="form">
                         <input type="password" name="passwordrepeat" required autocomplete="off" />
                         <label for="passwordrepeat" class="label label-passwordrepeat">
-                            <span class="content content-passwordrepeat">password repeat</span>
+                            <span class="content content-passwordrepeat">repeat password</span>
                         </label>
                     </div>
                     <div class="form">
@@ -52,9 +52,6 @@
                     </div>
                     <button class="submit" type="submit" name="submit">Sign Up</button>
                 </form>
-            </div>
-            <div class="other-form">
-                Already have an account? <a href="login.php">Log in</a>
             </div>
             
             <?php
@@ -94,6 +91,9 @@
             ?>
             
         </section>
+        <div class="other-form">
+            Already have an account? <a href="login.php">Log in</a>
+        </div>
 
 
         <script
@@ -111,6 +111,7 @@
                 });
             }
         </script>
+        
 
 <?php
     include_once 'header.php';
