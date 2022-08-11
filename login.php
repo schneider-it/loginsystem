@@ -3,13 +3,27 @@
 ?>
         <section class="login-form">
             <h2>Log In</h2>
-            <div class="login-form-form">                
-                <form action="includes/login.inc.php" method="post">
-                    <input type="text" name="uid" placeholder="Username/Email...">
-                    <input type="password" name="pwd" placeholder="Password...">
-                    <button type="submit" name="submit">Log In</button>
+            <div class="login-form-form">
+                <form method="post" action="includes/login.inc.php" autocomplete="off">
+                    <div class="form">
+                        <input type="text" name="username" required autocomplete="off" />
+                        <label for="username" class="label label-username">
+                            <span class="content content-username">username / email</span>
+                        </label>
+                    </div>
+                    <div class="form">
+                        <input type="password" name="password" required autocomplete="off" />
+                        <label for="password" class="label label-password">
+                            <span class="content content-password">password</span>
+                        </label>
+                    </div>
+                    <button class="submit" type="submit" name="submit">Log In</button>
                 </form>
             </div>
+            <div class="other-form">
+                No account? <a href="signup.php">Create one</a>
+            </div>
+            
 
             <?php
                 if (isset($_GET["error"])) {

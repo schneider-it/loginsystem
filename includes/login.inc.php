@@ -2,22 +2,30 @@
 
 if (isset($_POST["submit"])) {
     
-    $username = $_POST["uid"];
-    $pwd = $_POST["pwd"];
+    // Grabbing the data
+    $usernameoremail = $_POST["username"];
+    $password = $_POST["password"];
 
-    require_once 'dbh.inc.php';
-    require_once 'functions.inc.php';
+    // require_once 'dbh.inc.php';
+    // require_once 'functions.inc.php';
 
-    if (emptyInputLogin($username, $pwd) !== false) {
-        header("location: ../login.php?error=emptyinput");
-        exit();
-    }
+    // Instantiate SignupController Class
+    include '../classes/dbh.class.php';
+    include '../classes/login.class.php';
+    include '../classes/login-controller.class.php';
 
-    loginUser($conn, $username, $pwd);
+    $login = new LoginController($usernameoremail, $password);
 
+    // create User
+    $login->loginUser();
+
+    // Instantiate Login Class and Login User
+    // loginUser($conn, $username, $password);
+    header("location: ../index.php");
+    exit();
 }
 
 else {
-    header("location: ../login.php");
+    header("location: ../index.php");
     exit();
 }

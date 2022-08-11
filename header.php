@@ -14,14 +14,14 @@
 </head>
 <body>
     <nav>
-        <div class="wrapper">
+        <div class="wrapper header">
             <div class="logo">Logo</div>
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="discover.php">About Us</a></li>
                 <li><a href="blog.php">Find Blogs</a></li>
                 <?php
-                    if (isset($_SESSION["useruid"])) {
+                    if (isset($_SESSION["enduser_username"])) {
                         echo "<li><a href='profile.php'>Profile</a></li>";
                         echo "<li><a href='includes/logout.inc.php'>Log Out</a></li>";
                     }

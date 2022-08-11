@@ -1,4 +1,14 @@
+:root {
+    /* --background-dark: #002233;
+    --background-light: #0066ff; */
+    --color: #000000;
+    --light-color: #333;
+    --form: #5fa8d3;
+}
+
 * {
+    margin: 0;
+    padding: 0;
     font-family: "Poppins", sans-serif;
 }
 
@@ -7,16 +17,21 @@
     margin: 1rem 10vw;
 }
 
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
 .logo {
-    transform: translateY(164%);
+    display: inline;
     pointer-events: none;
 }
 
 ul {
-    margin-left: 50%;
     display: flex;
     justify-content: space-between;
     list-style-type: none;
+    width: min(450px, 90%);
 }
 
 a {
@@ -59,28 +74,169 @@ a {
     color: white;
 }
 
+/* -------------------------------------------------- Form -------------------------------------------------- */
+
 .signup-form {
-    margin: 15rem 30rem;
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
 }
 
-.signup-form-form > form > * {
-    display: block;
-    margin-bottom: 0.3rem;
-}
-
-.signup-form-form > form > input {
-    width: 100%;
+.signup-form > h2 {
+    text-align: center;
 }
 
 .login-form {
-    margin: 18rem 30rem;
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
 }
 
-.login-form-form > form > * {
-    display: block;
-    margin-bottom: 0.3rem;
+.login-form > h2 {
+    text-align: center;
 }
 
-.login-form-form > form > input {
+form {
+    /* width: 50vw; */
+    position: relative;
+    /* margin-top: 5vh; */
+}
+
+.form {
+    width: min(450px, 80vw);
+    height: 6vh;
+    position: relative;
+    overflow: hidden;
+    margin: 1vh 0;
+}
+
+.form-message {
+    width: 50vw;
+    height: 25vh;
+    overflow-x: hidden;
+}
+
+.form input,
+.form textarea {
     width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+    background: none;
+    padding-top: 0.8vh;
+    font-size: 2vh;
+    color: var(--light-color);
+}
+
+.form textarea {
+    padding-top: 0vh;
+    margin-top: 5vh;
+    resize: none;
+}
+
+.form label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-bottom: 1px solid var(--color);
+}
+
+/* .form-message label {
+    height: 30vh;
+} */
+
+.form label::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    bottom: -1px;
+    border-bottom: 3px solid var(--form);
+    transform: translateX(-101%);
+    transition: all 0.3s ease;
+}
+
+.form .content {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    transition: all 0.3s ease;
+}
+
+.form input:focus + .label .content,
+.form input:valid + .label .content {
+    transform: translateY(-3vh);
+    font-size: 14px;
+    color: var(--form);
+}
+
+.form textarea:focus + .label .content,
+.form textarea:valid + .label .content {
+    transform: translateY(-20vh);
+    font-size: 14px;
+    color: var(--form);
+}
+
+.form input:focus + .label::after,
+.form input:valid + .label::after,
+.form textarea:focus + .label::after,
+.form textarea:valid + .label::after {
+    transform: translateX(0%);
+}
+
+.submit {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid var(--light-color);
+    background: none;
+    padding: 10px 20px;
+    font-size: 20px;
+    color: var(--light-color);
+    cursor: pointer;
+    margin-top: 2vh;
+    transition: all 0.8s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.submit:hover,
+.submit:focus {
+    border: 1px solid var(--form);
+    color: var(--color);
+}
+
+.submit::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0%;
+    background: #5fa8d3;
+    z-index: -1;
+    border-radius: 50% 50% 0 0;
+    transition: all 0.8s ease;
+}
+
+.submit:hover::before,
+.submit:focus::before {
+    height: 200%;
+}
+
+.other-form {
+    text-align: center;
+    margin-block: 4vh;
+}
+
+.other-form > a {
+    text-decoration: underline;
+    color: blue;
 }
