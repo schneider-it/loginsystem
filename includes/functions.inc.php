@@ -1,9 +1,9 @@
 <?php
 
-function emptyInputSignup($name, $email, $username, $pwd, $pwdRepeat) {
+function emptyInputSignup($username, $email, $password, $passwordrepeat, $fullname) {
     $result;
 
-    if (empty($name) ||empty($email) || empty($username) || empty($pwd) || empty($pwdRepeat)) {
+    if (empty($username) ||empty($email) || empty($password) || empty($passwordrepeat) || empty($fullname)) {
         $result = true;
     }
 
@@ -14,7 +14,7 @@ function emptyInputSignup($name, $email, $username, $pwd, $pwdRepeat) {
     return $result;
 }
 
-function invalidUid($username) {
+function invalidUsername($username) {
     $result;
 
     if (!preg_match("/^[a-zA-Z0-9]*$/", $username)) {
@@ -42,10 +42,35 @@ function invalidEmail($email) {
     return $result;
 }
 
-function pwdMatch($pwd, $pwdRepeat) {
+function passwordStrength($password) {
     $result;
 
-    if ($pwd !== $pwdRepeat) {
+    // Validate password strength
+    $uppercase = preg_match('@[A-Z]@', $password);
+    $lowercase = preg_match('@[a-z]@', $password);
+    $number    = preg_match('@[0-9]@', $password);
+    $specialChars = preg_match('@[^\w]@', $password);
+
+    $strength = 0;
+
+    if($uppercase) $strength = $strength + 1;
+    if($lowercase) $strength = $strength + 1;
+    if($number) $strength = $strength + 1;
+    if($specialChars) $strength = $strength + 1;
+
+    if($strength < 3 || strlen($password) < 8) {
+        $result = true;
+    }
+
+    else $result = false;
+
+    return $result;
+}
+
+function passwordMatch($password, $passwordrepeat) {
+    $result;
+
+    if ($password !== $passwordrepeat) {
         $result = true;
     }
 
@@ -56,8 +81,8 @@ function pwdMatch($pwd, $pwdRepeat) {
     return $result;
 }
 
-function uidExists($conn, $username) {
-    $sql = "SELECT * FROM users WHERE usersUid = ?;";
+function usernameExists($conn, $username) {
+    $sql = "SELECT * FROM enduser WHERE enduser_username = ?;";
     $stmt = mysqli_stmt_init($conn);
 
     if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -83,7 +108,7 @@ function uidExists($conn, $username) {
 }
 
 function emailExists($conn, $email) {
-    $sql = "SELECT * FROM users WHERE usersEmail = ?;";
+    $sql = "SELECT * FROM enduser WHERE enduser_email = ?;";
     $stmt = mysqli_stmt_init($conn);
 
     if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -108,8 +133,8 @@ function emailExists($conn, $email) {
     mysqli_stmt_close($stmt);
 }
 
-function createUser($conn, $name, $email, $username, $pwd) {
-    $sql = "INSERT INTO users (usersName, usersEmail, usersUid, usersPwd) VALUES (?, ?, ?, ?);";
+function createUser($conn, $username, $email, $password, $fullname) {
+    $sql = "INSERT INTO enduser (enduser_username, enduser_email, enduser_password, enduser_fullname) VALUES (?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
 
     if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -117,19 +142,19 @@ function createUser($conn, $name, $email, $username, $pwd) {
         exit();
     }
 
-    $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+    $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
 
-    mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $username, $hashedPwd);
+    mysqli_stmt_bind_param($stmt, "ssss", $username, $email, $hashedpassword, $fullname);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
-    loginUser($conn, $username, $pwd);
+    loginUser($conn, $username, $password);
 }
 
-function emptyInputLogin($username, $pwd) {
+function emptyInputLogin($username, $password) {
     $result;
 
-    if (empty($username) || empty($pwd)) {
+    if (empty($username) || empty($password)) {
         $result = true;
     }
 
@@ -140,27 +165,41 @@ function emptyInputLogin($username, $pwd) {
     return $result;
 }
 
-function loginUser($conn, $username, $pwd) {
-    $uidExists = uidExists($conn, $username, $username);
+function loginUser($conn, $usernameoremail, $password) {
+    $usernameExists = usernameExists($conn, $usernameoremail, $usernameoremail);
 
-    if ($uidExists === false) {
+    if ($usernameExists === false) {
         header("location: ../login.php?error=wronglogin");
         exit();
     }
 
-    $pwdHashed = $uidExists["usersPwd"];
-    $checkPwd = password_verify($pwd, $pwdHashed);
+    $passwordHashed = $usernameExists["enduser_password"];
+    $checkpassword = password_verify($password, $passwordHashed);
 
-    if ($checkPwd === false) {
+    if ($checkpassword === false) {
         header("location: ../login.php?error=wrongpassword");
         exit();
     }
 
-    else if ($checkPwd === true) {
+    else if ($checkpassword === true) {
         session_start();
-        $_SESSION["userid"] = $uidExists["usersId"];
-        $_SESSION["useruid"] = $uidExists["usersUid"];
+        $_SESSION["enduser_id"] = $usernameExists["enduser_id"];
+        $_SESSION["enduser_username"] = $usernameExists["enduser_username"];
         header("location: ../index.php");
         exit();
     }
+}
+
+function emptyInputResetpassword($password, $passwordrepeat) {
+    $result;
+
+    if (empty($password) || empty($passwordrepeat)) {
+        $result = true;
+    }
+
+    else {
+        $result = false;
+    }
+
+    return $result;
 }

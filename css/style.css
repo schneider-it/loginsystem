@@ -170,23 +170,23 @@ form {
 }
 
 .form input:focus + .label .content,
-.form input:valid + .label .content {
+.form input:visited + .label .content {
     transform: translateY(-3vh);
     font-size: 14px;
     color: var(--form);
 }
 
 .form textarea:focus + .label .content,
-.form textarea:valid + .label .content {
+.form textarea:visited + .label .content {
     transform: translateY(-20vh);
     font-size: 14px;
     color: var(--form);
 }
 
 .form input:focus + .label::after,
-.form input:valid + .label::after,
+.form input:visited + .label::after,
 .form textarea:focus + .label::after,
-.form textarea:valid + .label::after {
+.form textarea:visited + .label::after {
     transform: translateX(0%);
 }
 
@@ -243,4 +243,20 @@ form {
 .other-form > a {
     text-decoration: underline;
     color: blue;
+}
+
+.button {
+    background: #eee;
+    border: 2px solid #bbb;
+    padding: 8px 20px;
+    border-radius: 10px;
+    color: #222;
+    font-weight: 600;
+    transition: all 0.1s ease-in-out;
+}
+
+.button:hover {
+    background: #ddd;
+    border: 2px solid #aaa;
+    color: #111;
 }

@@ -38,8 +38,8 @@ if (isset($_POST["submit"])) {
     $sql = "INSERT INTO password_reset (password_reset_email, password_reset_selector, password_reset_token, password_reset_expires) VALUES (?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
 
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        echo "There was an error";
+    if (!mysqli_stmt_prepare($stmt, $sql)) {        
+        header("location: ../reset-password.php?error=stmtFailed");
         exit();
     }
 
@@ -70,8 +70,8 @@ if (isset($_POST["submit"])) {
     $mail->Host = 'bsmtp.a1.net';
     $mail->Port = '587';
     $mail->isHTML();
-    $mail->Username = 'help@schneider-it.at';
-    $mail->Password = '#iboyiw90';
+    $mail->Username = 'administrator@schneider-it.at';
+    $mail->Password = '#Iboyiw90';
     $mail->SetFrom('no-reply@schneider-it.at');
     $mail->Subject = $subject;
     $mail->Body = $message;
