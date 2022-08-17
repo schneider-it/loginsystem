@@ -185,6 +185,9 @@ function loginUser($conn, $usernameoremail, $password) {
         session_start();
         $_SESSION["enduser_id"] = $usernameExists["enduser_id"];
         $_SESSION["enduser_username"] = $usernameExists["enduser_username"];
+        $_SESSION["enduser_email"] = $usernameExists["enduser_email"];
+        $_SESSION["enduser_fullname"] = $usernameExists["enduser_fullname"];
+        $_SESSION["enduser_profilepicturepath"] = $usernameExists["enduser_profilepicturepath"];
         header("location: ../index.php");
         exit();
     }
